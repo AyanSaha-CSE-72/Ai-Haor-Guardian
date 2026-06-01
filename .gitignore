@@ -28,3 +28,5 @@ dist-ssr
 >>>>>>> feature-name
 
 .env.local
+.env
+.env.local
