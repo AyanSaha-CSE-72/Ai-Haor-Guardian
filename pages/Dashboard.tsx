@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CloudLightning, Fish, Loader2, MapPin, RefreshCw, ShieldAlert, Wind } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import CountryLocationSelector from '../components/CountryLocationSelector';
 import { getWetlandInsights } from '../services/gemini';
 import { WetlandInsightData } from '../types';
 
@@ -54,22 +55,33 @@ const Dashboard: React.FC = () => {
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t('dash.location.label')}
               </label>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  placeholder={t('dash.location.placeholder')}
-                  className="flex-1 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/90 dark:bg-slate-950/90 px-4 py-3 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary"
-                />
-                <button
-                  onClick={handleAnalyze}
-                  disabled={loading || !location.trim()}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 font-semibold text-white shadow-lg shadow-sky-500/20 transition-colors hover:bg-sky-600 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {loading ? <Loader2 size={18} className="animate-spin" /> : <RefreshCw size={18} />}
-                  {loading ? t('dash.btn.analyzing') : t('dash.btn.analyze')}
-                </button>
+              <div className="flex flex-col md:flex-row gap-3 items-center">
+                <div className="flex-1 w-full">
+                  <CountryLocationSelector layout="vertical" onChange={(country, loc) => {
+                    // Build a helpful location string for the AI service
+                    if (!loc && country) setLocation(country.name);
+                    else if (loc && country) setLocation(`${loc}, ${country.name}`);
+                    else setLocation(loc || '');
+                  }} />
+
+                  <input
+                    type="text"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder={t('dash.location.placeholder')}
+                    className="mt-3 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/90 dark:bg-slate-950/90 px-4 py-3 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary"
+                  />
+                </div>
+                <div className="flex-shrink-0">
+                  <button
+                    onClick={handleAnalyze}
+                    disabled={loading || !location.trim()}
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 font-semibold text-white shadow-lg shadow-sky-500/20 transition-colors hover:bg-sky-600 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {loading ? <Loader2 size={18} className="animate-spin" /> : <RefreshCw size={18} />}
+                    {loading ? t('dash.btn.analyzing') : t('dash.btn.analyze')}
+                  </button>
+                </div>
               </div>
               <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                 {t('dash.location.help')}
