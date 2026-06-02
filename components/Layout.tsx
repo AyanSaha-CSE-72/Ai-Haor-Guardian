@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Anchor, Home, Info, Activity, Map as MapIcon, Bell, MessageSquare, Languages } from 'lucide-react';
+import { Menu, X, Anchor, Sun, Moon, Home, Info, Activity, Map as MapIcon, Bell, MessageSquare, Languages } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface LayoutProps {
@@ -9,14 +9,25 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setIsDark(true);
       document.documentElement.classList.add('dark');
     }
   }, []);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    if (!isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'bn' : 'en');
@@ -69,6 +80,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <Languages size={16} />
                   {language === 'en' ? 'BN' : 'EN'}
                 </button>
+
+                {/* Theme Toggle */}
+                <button
+                  onClick={toggleTheme}
+                  className="p-2 rounded-full text-slate-500 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none"
+                >
+                  {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                </button>
               </div>
             </div>
 
@@ -78,6 +97,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   className="flex items-center gap-1 px-2 py-1 rounded-full border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300"
                 >
                   {language === 'en' ? 'BN' : 'EN'}
+              </button>
+              <button onClick={toggleTheme} className="p-2 text-slate-500">
+                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
