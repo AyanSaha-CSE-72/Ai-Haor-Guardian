@@ -18,6 +18,15 @@
         }
       }
     </script>
+    <script>
+      (() => {
+        try {
+          const storedTheme = localStorage.getItem('theme');
+          const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', storedTheme === 'dark' || (!storedTheme && systemPrefersDark));
+        } catch (_) {}
+      })();
+    </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
       body {
