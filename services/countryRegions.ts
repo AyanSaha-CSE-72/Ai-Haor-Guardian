@@ -6,7 +6,7 @@ export const regionsMap: Record<string, string[]> = {
   BD: ['Sundarbans', 'Hakaluki Haor', 'Tanguar Haor', 'Ghorashal Haor', 'Hatiya Char Wetlands'],
   GB: ['The Broads (Norfolk & Suffolk)', 'Severn Estuary Marshes', 'Skomer Wetlands'],
   CA: ['Point Pelee Marshes', 'Lake St. Clair Wetlands', 'Fraser River Delta'],
-  IN: ['Chengalpattu Marshes'],
+  
 };
 
 export default regionsMap;
