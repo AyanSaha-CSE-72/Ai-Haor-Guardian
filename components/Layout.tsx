@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navItems = [
     { path: '/', label: t('nav.home'), icon: <Home size={18} /> },
     { path: '/dashboard', label: t('nav.dashboard'), icon: <Activity size={18} /> },
-    { path: '/map', label: t('nav.map'), icon: <MapIcon size={18} /> },
+  
     { path: '/alerts', label: t('nav.alerts'), icon: <Bell size={18} /> },
     { path: '/chat', label: t('nav.chat'), icon: <MessageSquare size={18} /> },
     { path: '/about', label: t('nav.about'), icon: <Info size={18} /> },
