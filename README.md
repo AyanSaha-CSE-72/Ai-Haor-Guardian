@@ -213,7 +213,4 @@ The system is especially useful for research demos, climate-resilience prototype
 **global-wetland-guardian (2026). Satellite-Assisted Wetland Intelligence & AI Early Warning Dashboard for Wetland and Coastal Regions.**
 
 ---
-
-## 
-
-© 2026 AI Haor Guardian. All rights reserved.
+ 

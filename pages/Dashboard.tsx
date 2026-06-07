@@ -55,24 +55,11 @@ const Dashboard: React.FC = () => {
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t('dash.location.label')}
               </label>
-              <div className="flex flex-col md:flex-row gap-3 items-center">
+              <div className="flex flex-col md:flex-row gap-3 items-start">
                 <div className="flex-1 w-full">
-                  <CountryLocationSelector layout="vertical" onChange={(country, loc) => {
-                    // Build a helpful location string for the AI service
-                    if (!loc && country) setLocation(country.name);
-                    else if (loc && country) setLocation(`${loc}, ${country.name}`);
-                    else setLocation(loc || '');
-                  }} />
-
-                  <input
-                    type="text"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    placeholder={t('dash.location.placeholder')}
-                    className="mt-3 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/90 dark:bg-slate-950/90 px-4 py-3 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary"
-                  />
+                  <CountryLocationSelector layout="vertical" onChange={(loc?: string) => setLocation(loc || '')} />
                 </div>
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 md:mt-8">
                   <button
                     onClick={handleAnalyze}
                     disabled={loading || !location.trim()}
