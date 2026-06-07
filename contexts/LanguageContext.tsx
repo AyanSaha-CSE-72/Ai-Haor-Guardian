@@ -7,7 +7,7 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const translations: Record<string, Record<Language, string>> = {
+const translations: Record<string, Record<string, string>> = {
   // Navigation
   'nav.home': { en: 'Home', bn: 'হোম' },
   'nav.dashboard': { en: 'AI Insights', bn: 'AI ইনসাইটস' },
@@ -141,7 +141,9 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [language, setLanguage] = useState<Language>('en');
 
   const t = (key: string): string => {
-    return translations[key]?.[language] || key;
+    // when 'auto' is selected we keep UI strings in English fallback
+    const langToUse = language === 'auto' ? 'en' : language;
+    return translations[key]?.[langToUse] || key;
   };
 
   return (

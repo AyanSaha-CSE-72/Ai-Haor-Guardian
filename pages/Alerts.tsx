@@ -139,7 +139,7 @@ const Alerts: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary py-2.5 px-3 border"
-                    placeholder="Rahim Mia"
+                    placeholder="name"
                   />
                 </div>
                 <div>
@@ -150,7 +150,7 @@ const Alerts: React.FC = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary py-2.5 px-3 border"
-                    placeholder="017..."
+                    placeholder=""
                   />
                 </div>
               </div>

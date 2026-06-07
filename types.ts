@@ -73,4 +73,4 @@ export const HAOR_LIST = [
   "Hail Haor"
 ];
 
-export type Language = 'en' | 'bn';
+export type Language = string;
